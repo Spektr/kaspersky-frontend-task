@@ -19,6 +19,7 @@ var webpackConfig = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({ name: ['boot', 'vendor', 'polyfills'], minChunks: Infinity }),
     new CopyWebpackPlugin([{ from: 'src/vendor', to: 'vendor' }]),
+    new CopyWebpackPlugin([{ from: 'src/assets', to: 'assets' }]),
     new HtmlWebpackPlugin({ template: 'src/index.html', chunksSortMode: 'dependency' })
   ],
 

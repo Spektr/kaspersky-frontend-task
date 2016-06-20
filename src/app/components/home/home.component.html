@@ -1,1 +1,5 @@
-<div>Глагна</div>
+<div class="home-component">
+    <book-list-component (bookChanges)="selectBook($event)"></book-list-component>
+    <hr />
+    <book-detail-component *ngIf="selectedBook" [model]="selectedBook"></book-detail-component>
+</div>

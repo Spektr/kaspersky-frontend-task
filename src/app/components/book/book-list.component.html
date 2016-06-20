@@ -1,0 +1,30 @@
+<div class="book-list-component">
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="visible-md visible-lg">Изображение</th>
+            <th class="">Заголовок</th>
+            <th class="hidden-xs">Авторы</th>
+            <th class="hidden-xs">Страниц</th>
+            <th class="visible-md visible-lg">Издательство</th>
+            <th class="hidden-xs">Год публикации</th>
+            <th class="visible-md visible-lg">Дата выхода в тираж</th>
+            <th class="">ISBN</th>
+        </tr>
+        </thead>
+        <tr *ngFor="let book of aBook" (click)="selectBook(book)">
+            <td class="visible-md visible-lg">
+                <img *ngIf="book.image" class="img-responsive" src="{{book.image.getSrc()}}" alt="">
+            </td>
+            <td>{{book.title}}</td>
+            <td class="hidden-xs">
+                <div class="label label-default center-block" *ngFor="let author of book.authors">{{author.firstName}} {{author.lastName}}</div>
+            </td>
+            <td class="hidden-xs">{{book.pageCount}}</td>
+            <td class="visible-md visible-lg">{{book.publisher}}</td>
+            <td class="hidden-xs">{{book.publicationDate}}</td>
+            <td class="visible-md visible-lg">{{book.releaseDate}}</td>
+            <td>{{book.isbn}}</td>
+        </tr>
+    </table>
+</div>
