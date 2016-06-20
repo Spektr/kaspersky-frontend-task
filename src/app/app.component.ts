@@ -13,7 +13,9 @@ import {HomeComponent} from './components/home/home.component'
     styles:[`
         html,body{
             height: 100%;}
-                       
+        
+        .ng-invalid{background-color: #ffc59f;}
+                    
         .app-component{
             min-height: 100%;
             min-width: 300px;
