@@ -19,11 +19,12 @@ export class BookDetailComponent implements OnInit {
             'title',
             Validators.compose([Validators.required, Validators.maxLength(30)])
         ),
-        authors: new Control(
-            'authors',
-            function (control):{ [key:string]:any } { /* TODO: <- */
-                return {authors: true};
+        authors: new ControlGroup(
+            {
+
+
             }
+
         ),
         pageCount: new Control(
             'pageCount',
