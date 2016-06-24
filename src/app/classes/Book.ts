@@ -1,7 +1,6 @@
 
 import {IBook} from '../interfaces/IBook';
 import {IAuthor} from '../interfaces/IAuthor';
-import {IImage} from '../interfaces/IImage';
 
 export class Book implements IBook{
 
@@ -13,6 +12,6 @@ export class Book implements IBook{
         public publicationDate:string,
         public releaseDate:string,
         public isbn:string,
-        public image:IImage
+        public imageBase64:string
     ){ }
 }

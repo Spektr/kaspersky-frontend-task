@@ -1,5 +1,4 @@
 import {IAuthor} from './IAuthor';
-import {IImage} from './IImage';
 
 export interface IBook{
     title:string;
@@ -9,5 +8,5 @@ export interface IBook{
     publicationDate:string;
     releaseDate:string;
     isbn:string;
-    image:IImage;
+    imageBase64:string;
 }

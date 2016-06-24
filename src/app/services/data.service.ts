@@ -7,7 +7,10 @@ import {IBook} from '../interfaces/IBook';
 export class DataService {
 
     private _isLocalStorage:boolean = ('localStorage' in window && !!window['localStorage']);
-    private _data:{ books:IBook[] } = null;
+    private _data:{
+        books:IBook[];
+        sorting:string;
+    } = null;
 
     constructor() {
 
@@ -23,7 +26,8 @@ export class DataService {
 
         if(!this._data){
             this._data = {
-                books:aBook
+                books:aBook,
+                sorting:null
             };
         }
     }
@@ -40,5 +44,19 @@ export class DataService {
 
     getBooks():IBook[]{
         return this._data.books;
+    }
+
+    setBooks(books:IBook[]){
+        this._data.books = books;
+        this.synchronize();
+    }
+
+    getSorting(){
+        return this._data.sorting;
+    }
+
+    setSorting(name:string){
+        this._data.sorting = name;
+        this.synchronize();
     }
 }
