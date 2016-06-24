@@ -1,5 +1,10 @@
 import {Book} from "../classes/Book";
-
+/**
+ * Массив дефолтных значений для заполнения таблицы
+ *
+ * @module aBook
+ * @type {Book[]}
+ */
 export var aBook:Book[] = [
 
     new Book(

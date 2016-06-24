@@ -1,5 +1,9 @@
-
+/**
+ * Интерфейс сущности Автор
+ *
+ * @interface
+ */
 export interface IAuthor{
-    firstName:string;
-    lastName:string;
+    firstName:string;   // Имя
+    lastName:string;    // Фамилия
 }
