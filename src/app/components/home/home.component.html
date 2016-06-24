@@ -1,5 +1,9 @@
 <div class="home-component">
-    <book-list-component (bookChanges)="selectBook($event)"></book-list-component>
-    <hr />
-    <book-detail-component *ngIf="selectedBook" [model]="selectedBook"></book-detail-component>
+    <book-list-component [aBook]="aBook" (selectBookChange)="selectBook($event)"></book-list-component>
+    <hr/>
+    <div class="text-center">
+        <button *ngIf="!selectedBook" class="btn btn-default" (click)="appendBook()">Добавить Книгу</button>
+    </div>
+    <book-detail-component *ngIf="selectedBook" [model]="selectedBook" (modelChange)="updateBook($event)"
+                           (modelRemove)="removeBook($event)"></book-detail-component>
 </div>
