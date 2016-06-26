@@ -2,8 +2,8 @@
     <div *ngFor="let item of items; let itemIndex = index" class="form-group">
         <div class="col-md-12">
             <input *ngFor="let field of format; let fieldIndex = index" [(ngModel)]="item[field.name]"
-                   [placeholder]="field.value" class="form-control" />
-            <!--[ngFormControl]="groupControl.controls[itemIndex+fieldIndex]"-->
+                   [placeholder]="field.value" class="form-control"
+                   [ngFormControl]="groupControl.controls[generateName([itemIndex, fieldIndex])]"/>
             <button type="button" class="btn btn-default" (click)="remove(item)">
                 <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
             </button>
@@ -13,5 +13,3 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
     </button>
 </div>
-
-{{monitor}}

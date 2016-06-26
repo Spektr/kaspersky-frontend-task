@@ -1,69 +1,91 @@
 <div class="book-detail-component">
-    <form class="form-horizontal" (ngSubmit)="editBook()">
-        <div class="form-group">
-            <label for="title" class="col-sm-2 control-label">Заголовок</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="title" placeholder="Заголовок" [(ngModel)]="model.title"
-                       [ngFormControl]="formValidation.controls.title">
-            </div>
+    <div class="row">
+        <div [ngClass]="styles.image" >
+            <img src="{{editedModel.imageBase64}}" class="img-responsive img-thumbnail" alt="">
+            <br/>
+            <br/>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Авторы</label>
-            <div class="col-sm-10">
-                <dynamic-list-component [(items)]="model.authors" [format]="[
-                    {name:'firstName', value:'Имя'},
-                    {name:'lastName', value:'Фамилия'}
-                ]" [control]="formValidation.controls.authors"></dynamic-list-component>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pageCount" class="col-sm-2 control-label">Страниц</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="pageCount" placeholder="Количество страниц"
-                       [(ngModel)]="model.pageCount" [ngFormControl]="formValidation.controls.pageCount">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="publisher" class="col-sm-2 control-label">Издетельство</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="publisher" placeholder="Издетельство"
-                       [(ngModel)]="model.publisher" [ngFormControl]="formValidation.controls.publisher">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="publicationDate" class="col-sm-2 control-label">Год публикации</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="publicationDate" placeholder="Год публикации (пример: 1800)"
-                       [(ngModel)]="model.publicationDate" [ngFormControl]="formValidation.controls.publicationDate">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="releaseDate" class="col-sm-2 control-label">Дата выхода в тираж</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="releaseDate" placeholder="Дата выхода в тираж (пример: 01.01.1800)"
-                       [(ngModel)]="model.releaseDate" [ngFormControl]="formValidation.controls.releaseDate">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="isbn" class="col-sm-2 control-label">ISBN</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="isbn" placeholder="Международный идентификатор книги"
-                       [(ngModel)]="model.isbn" [ngFormControl]="formValidation.controls.isbn">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="image" class="col-sm-2 control-label">Изображение</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="image" placeholder="Изображение" [(ngModel)]="model.title"
-                       [ngFormControl]="formValidation.controls.title">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" [disabled]="!formValidation.valid">Редактировать</button>
-            </div>
-        </div>
-    </form>
-</div>
 
-<div>{{monitor}}</div>
+        <div [ngClass]="styles.content" >
+            <form class="form-horizontal" (ngSubmit)="editBook()">
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">Заголовок</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="title" placeholder="Заголовок" [(ngModel)]="editedModel.title"
+                               [ngFormControl]="formValidation.controls.title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Авторы</label>
+                    <div class="col-sm-10">
+                        <dynamic-list-component
+                                [(items)]="editedModel.authors"
+                                [format]="[
+                                    {name:'firstName', value:'Имя', validator:authorValidator},
+                                    {name:'lastName', value:'Фамилия', validator:authorValidator}
+                                ]"
+                                [groupControl]="formValidation.controls.authors"
+                        ></dynamic-list-component>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pageCount" class="col-sm-2 control-label">Страниц</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="pageCount" placeholder="Количество страниц"
+                               [(ngModel)]="editedModel.pageCount" [ngFormControl]="formValidation.controls.pageCount">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="publisher" class="col-sm-2 control-label">Издетельство</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="publisher" placeholder="Издетельство"
+                               [(ngModel)]="editedModel.publisher" [ngFormControl]="formValidation.controls.publisher">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="publicationDate" class="col-sm-2 control-label">Год публикации</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="publicationDate" placeholder="Год публикации (пример: 1800)"
+                               [(ngModel)]="editedModel.publicationDate" [ngFormControl]="formValidation.controls.publicationDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="releaseDate" class="col-sm-2 control-label">Дата выхода в тираж</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="releaseDate" placeholder="Дата выхода в тираж (пример: 01.01.1800)"
+                               [(ngModel)]="editedModel.releaseDate" [ngFormControl]="formValidation.controls.releaseDate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="isbn" placeholder="Международный идентификатор книги"
+                               [(ngModel)]="editedModel.isbn" [ngFormControl]="formValidation.controls.isbn">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="image" class="col-sm-2 control-label">Изображение</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="image" (change)="loadImage($event)" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" (click)="removeImage()">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" [disabled]="!isDataValid || !editedModel.authors.length">Редактировать</button>
+                        <button class="btn btn-default" (click)="removeBook()">удалить</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>

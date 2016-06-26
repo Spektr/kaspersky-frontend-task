@@ -1,6 +1,19 @@
-
+/**
+ * Кастомные валидаторы
+ *
+ * @module Validators
+ * @example
+ * new Control('', Validators.minMax(0,10000)) - навешивает на контрол валидатор диапазона значений
+ */
 export var Validators = {
 
+    /**
+     * Валидация диапазона значений
+     *
+     * @param min {number}          - начинающиеся с (не менее, включая)
+     * @param max {number}          - заканчивающиеся до (не более, включая)
+     * @returns {function(any): {}} - лямбда для проверки значения контрола
+     */
     minMax(min:number, max:number){
 
         return function (control):{[key:string]:any} {
@@ -11,6 +24,12 @@ export var Validators = {
         };
     },
 
+    /**
+     * Валидация года начавшегося не раньше чем указанный (включая)
+     *
+     * @param minYear {number}      - минимальный доступный год
+     * @returns {function(any): {}} - лямбда для проверки значения контрола
+     */
     yearFrom(minYear:number){
 
         return function (control):{[key:string]:any}{
@@ -23,6 +42,12 @@ export var Validators = {
         }
     },
 
+    /**
+     * Валидация даты начавшейся не раньше чем указанная (включая)
+     *
+     * @param minDate {Date}        - минимально доступная дата
+     * @returns {function(any): {}} - лямбда для проверки значения контрола
+     */
     date(minDate:Date){
         return function (control):{[key:string]:any}{
             let value = control.value,
@@ -37,6 +62,13 @@ export var Validators = {
         };
     },
 
+    /**
+     * Валидация международного идентификатора книги
+     * чесно позаимоствованная регулярка
+     *
+     * @see {@link https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s13.html}
+     * @returns {function(any): {}} - лямбда для проверки значения контрола
+     */
     isbn(){
         return function (control):{[key:string]:any}{
             let subject = control.value,
