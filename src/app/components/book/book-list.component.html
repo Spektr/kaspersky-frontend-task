@@ -3,16 +3,20 @@
         <thead>
         <tr>
             <th class="hidden-xs hidden-sm">Изображение</th>
-            <th class="">
+            <th class="" (click)="sortBy('title')">
                 Заголовок
-                <span class="glyphicon glyphicon-sort-by-attributes" [class.text-danger]="_dataService.getSorting()=='title'" aria-hidden="true" (click)="sortBy('title')"></span>
+                <span class="glyphicon glyphicon-sort-by-attributes"
+                      [class.text-danger]="_dataService.getSorting()=='title'" aria-hidden="true"
+                ></span>
             </th>
             <th class="hidden-xs">Авторы</th>
             <th class="hidden-xs">Страниц</th>
             <th class="hidden-xs hidden-sm">Издательство</th>
-            <th class="">
+            <th class="" (click)="sortBy('publicationDate')">
                 Год публикации
-                <span class="glyphicon glyphicon-sort-by-attributes" [class.text-danger]="_dataService.getSorting()=='publicationDate'" aria-hidden="true"  (click)="sortBy('publicationDate')"></span>
+                <span class="glyphicon glyphicon-sort-by-attributes"
+                      [class.text-danger]="_dataService.getSorting()=='publicationDate'" aria-hidden="true"
+                ></span>
             </th>
             <th class="hidden-xs hidden-sm">Дата выхода в тираж</th>
             <th class="">ISBN</th>

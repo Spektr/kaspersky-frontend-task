@@ -1,7 +1,20 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter} from '@angular/core';
 import {IBook} from '../../interfaces/IBook';
 import {DataService} from '../../services/data.service'
 
+/**
+ * Компонент отображения списка книг
+ *
+ * @example {
+ *  <book-list-component
+ *      [aBook]="aBook"
+ *      (selectBookChange)="selectBook($event)"
+ *  ></book-list-component>
+ *
+ *   param {Array<Object>} aBook         - список книг для отображения
+ *   param {Function} selectBook($event) - функция для обработки события выбора конкретной книги
+ * }
+ */
 @Component({
     moduleId: module.id,
     selector: 'book-list-component',
@@ -22,24 +35,36 @@ import {DataService} from '../../services/data.service'
     `],
     template: require('./book-list.component.html')
 })
-export class BookListComponent implements OnInit{
+export class BookListComponent{
 
-    selectBookChange:EventEmitter<IBook> = new EventEmitter();
+    // список книг
     aBook:IBook[]=null;
+
+    // эмитер события выбора книги
+    selectBookChange:EventEmitter<IBook> = new EventEmitter();
+
 
     constructor(
         private _dataService:DataService
     ){}
 
-    ngOnInit(){
-        let sorting:string = this._dataService.getSorting();
-    }
-
-    selectBook(book:IBook){
+    /**
+     * Выбор книги из таблицы
+     * Выстреливает событие выбора
+     *
+     * @param {IBook} book  - выбранная книга
+     */
+    selectBook(book:IBook):void{
         this.selectBookChange.emit(book);
     }
 
-    sortBy(name:string, asc?:boolean){
+    /**
+     * Сортировка таблицы
+     *
+     * @param {string} name - поле по которому будет сортировка
+     * @param {boolean} asc - направление сортировки (если потребуется)
+     */
+    sortBy(name:string, asc?:boolean):void{
         let self = this,
             negative = asc?1:-1;
 
