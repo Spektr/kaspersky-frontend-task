@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачка на CSS</title>
+    <style>
+        body{
+            padding: 5px;
+            margin: 0;}
+
+        /** Базовые стили (визуальное оформление)*/
+        .awesomeForm *{
+            color: #848484;
+            box-sizing: border-box; /** чтоб правильно выставлять процентную ширину */
+            }
+        .awesomeForm__input{
+            padding: 10px;}
+        .awesomeForm__button{
+            padding: 10px 25px;
+            border: 1px solid #d8d8d8;
+            font-weight: normal;
+            white-space: nowrap;    /** чтоб кнопа была однострочной */
+
+            background: #ffffff;
+            background: -moz-linear-gradient(top,  #ffffff 25%, #d8d8d8 100%);
+            background: -webkit-linear-gradient(top,  #ffffff 25%,#d8d8d8 100%);
+            background: linear-gradient(to bottom,  #ffffff 25%,#d8d8d8 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d8d8d8',GradientType=0 );
+
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+
+            box-shadow: 0 1px 2px #838383;}
+
+        /**
+         * Табличное решение
+         * Нельзя использовать тэг table, но можно перевесить поведение
+         */
+        .awesomeForm_table{}
+        .awesomeForm_table .awesomeForm__wrapper-input,
+        .awesomeForm_table .awesomeForm__wrapper-button{
+            display: table-cell;
+            margin: 0;
+            padding: 0;}
+        .awesomeForm_table .awesomeForm__wrapper-input{
+            padding: 0 15px 0 0;
+            width: 100%;}
+        .awesomeForm_table .awesomeForm__input{
+            width: 100%;}
+        html[dir=rtl] .awesomeForm_table .awesomeForm__wrapper-input{ /** перекидываем отступ между кнопкой и инпутом*/
+            padding: 0 0 0 15px;}
+        
+        /**
+         * Решение  с плавающими блоками
+         * Вырываем кнопку из контекста отрисовки с помощью присваивания ей плавающего позиционирования,
+         * соседний блок занимает оставшееся пространство, туда и вставляем инпут
+         */
+        .awesomeForm_float{}
+        .awesomeForm_float .awesomeForm__wrapper-button{
+            float: right;
+            margin: 0 0 0 15px;}
+        .awesomeForm_float .awesomeForm__wrapper-input{
+            overflow: hidden;   /** формируем новый контекст форматирования */
+            float: none;}
+        .awesomeForm_float .awesomeForm__input{
+            width: 100%;}
+        html[dir=rtl] .awesomeForm_float .awesomeForm__wrapper-button{ /** перекидываем отступ между кнопкой и инпутом*/
+            float: left;
+            margin: 0 15px 0 0;}
+
+
+    </style>
+</head>
+<body>
+<h2>По табличному</h2>
+<form action="" class="awesomeForm awesomeForm_table">
+    <div class="awesomeForm__wrapper-input">
+        <input class="awesomeForm__input" type="text">
+    </div>
+    <div class="awesomeForm__wrapper-button">
+        <button class="awesomeForm__button">Send code</button>
+    </div>
+    <div>Example: 72A22EF8-8766-4359-3978-EBBAC445687A</div>
+</form>
+
+<h2>Истинно по дивному</h2>
+<form action="" class="awesomeForm awesomeForm_float">
+    <div class="awesomeForm__wrapper-button">
+        <button class="awesomeForm__button">Send code</button>
+    </div>
+    <div class="awesomeForm__wrapper-input">
+        <input class="awesomeForm__input" type="text">
+    </div>
+    <div>Example: 72A22EF8-8766-4359-3978-EBBAC445687A</div>
+</form>
+
+<br>
+
+<button onclick="(function(event) {
+  document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
+})()">Переключить алфавиты</button>
+
+
+
+</body>
+</html>
