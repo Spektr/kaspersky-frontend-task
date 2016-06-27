@@ -69,7 +69,7 @@ export class BookDetailComponent implements OnChanges {
         ),
         releaseDate: new Control(
             'releaseDate',
-            CustomValidators.date(new Date('01.01.1800'))
+            CustomValidators.date(new Date(1800, 0, 1))
         ),
         isbn: new Control(
             'isbn',

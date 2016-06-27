@@ -51,11 +51,12 @@ export var Validators = {
     date(minDate:Date){
         return function (control):{[key:string]:any}{
             let value = control.value,
-                regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+                regex = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((?:18|19|20)\d\d)$/,
+                match = (value?value.match(regex):null);
 
             if (
-                regex.test(value)
-                && ((new Date(value)) >= minDate)
+                match
+                && ((new Date(+match[3],+match[2]-1,+match[1])) >= minDate)
             ) { return null;}
 
             return {date:true};
